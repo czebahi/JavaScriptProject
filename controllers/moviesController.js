@@ -10,7 +10,7 @@ exports.new = (req, res) => {
 exports.create = (req, res) => {
   req.isAuthenticated();
 
-  req.body.blog.author = req.session.userId;
+  req.body.movie.author = req.session.userId;
   Movie.create(req.body.movie)
     .then(() => {
       req.flash('success', 'New movie was created successfully');
@@ -46,7 +46,7 @@ exports.index = (req, res) => {
 
 exports.show = (req, res) => {
   req.isAuthenticated();
-  Blog.findOne({
+  Movie.findOne({
     _id: req.paras.id, 
     author: req.params.id})
       .then(movie => {
