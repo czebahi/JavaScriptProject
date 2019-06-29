@@ -24,7 +24,7 @@ exports.authenticate = (req, res) => {
             }else {
                 req.flash('error', 'ERROR: your credentials do not match');
                 res.redirect('/login');
-            }s
+            }
         });
     })
     .catch(err => {
