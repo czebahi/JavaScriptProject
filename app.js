@@ -67,9 +67,10 @@ app.use((req, res, next) => {
   req.isAuthenticated = () => {
     if(!isAuthenticated(req)){
       req.flash('error', 'You are not permitted to do this action');
-      req.redirect('/');
+      res.redirect('/');
     }
   }
+  
   res.locals.isAuthenticated = isAuthenticated(req);
   next();
 });

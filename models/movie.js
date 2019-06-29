@@ -11,6 +11,11 @@ const MovieSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author',
+    required: true
+  },
   status: {
     type: String,
     enum: ['DRAFT', 'PUBLISHED'],
