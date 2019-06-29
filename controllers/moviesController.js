@@ -2,6 +2,7 @@ const Movie = require('../models/movie');
 
 exports.new = (req, res) => {
     req.isAuthenticated();
+
     res.render('movies/new', {
       title: `New Movie Post`
     });
@@ -66,6 +67,7 @@ exports.drafts = (req, res) => {
     Movie.find({
       author: req.session.userId
     }).drafts()
+    .populate('author')
       .then(drafts => {
         res.render('movies/index', {
           movies: drafts,
@@ -84,6 +86,7 @@ exports.published = (req, res) => {
     Movie.find(({
       author: req.session.userId
     })).published()
+    .populate('author')
       .then(published => {
         res.render('movies/index', {
           movies: published,
