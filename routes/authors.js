@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const AuthorsController = require('../Controllers/authorsController');
+const AuthorsController = require('../controllers/authorsController');
 
 // routes
 
