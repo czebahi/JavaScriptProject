@@ -1,13 +1,16 @@
 const Movie = require('../models/movie');
 
 exports.new = (req, res) => {
+    req.isAuthenticated();
     res.render('movies/new', {
       title: `New Movie Post`
     });
 };
 
 exports.create = (req, res) => {
+  req.isAuthenticated();
 
+  req.body.blog.author = req.session.userId;
   Movie.create(req.body.movie)
     .then(() => {
       req.flash('success', 'New movie was created successfully');
@@ -24,7 +27,11 @@ exports.create = (req, res) => {
 
 
 exports.index = (req, res) => {
-    Movie.find()
+  req.isAuthenticated();
+    Movie.find({
+      author: req.session.userId
+    })
+    .populate('author')
       .then(movies => {
         res.render('movies/index', {
           movies: movies,
@@ -38,11 +45,14 @@ exports.index = (req, res) => {
 }
 
 exports.show = (req, res) => {
-    Movie.findById(req.params.id)
+  req.isAuthenticated();
+  Blog.findOne({
+    _id: req.paras.id, 
+    author: req.params.id})
       .then(movie => {
         res.render('movies/show', {
           movie: movie,
-          title: movie.title
+          title: req.body.movie.title
         });
       })
       .catch(err => {
@@ -52,7 +62,10 @@ exports.show = (req, res) => {
 }
 
 exports.drafts = (req, res) => {
-    Movie.find().drafts()
+  req.isAuthenticated();
+    Movie.find({
+      author: req.session.userId
+    }).drafts()
       .then(drafts => {
         res.render('movies/index', {
           movies: drafts,
@@ -67,7 +80,10 @@ exports.drafts = (req, res) => {
   
   
 exports.published = (req, res) => {
-    Movie.find().published()
+  req.isAuthenticated();
+    Movie.find(({
+      author: req.body.userId
+    })).published()
       .then(published => {
         res.render('movies/index', {
           movies: published,
@@ -81,10 +97,13 @@ exports.published = (req, res) => {
   }
 
 exports.edit = (req, res) => {
-    Movie.findById(req.params.id)
+  req.isAuthenticated();
+    Movie.findOne({
+      _id: req.paras.id, 
+      author: req.params.id})
     .then(movie=>{
         res.render('movies/edit', {
-            title: `Edit ${Movie.title}`,
+            title: `Edit ${req.body.movie.title}`,
             movie: movie
         });
     })
@@ -95,8 +114,10 @@ exports.edit = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  req.isAuthenticated();
   Movie.updateOne({
-    _id: req.body.id
+    _id: req.body.id,
+    author: req.session.userId
   }, req.body.movie, {
     runValidators: true
   })
@@ -114,8 +135,10 @@ exports.update = (req, res) => {
 };
 
 exports.destroy = (req, res) => {
+  req.isAuthenticated();
   Movie.deleteOne({
-    _id: req.body.id
+    _id: req.body.id,
+    author: req.session.userId
   })
   .then(()=>{
     req.flash('success', 'Your Movie was deleted successfully');
