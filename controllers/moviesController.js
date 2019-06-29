@@ -47,7 +47,7 @@ exports.index = (req, res) => {
 exports.show = (req, res) => {
   req.isAuthenticated();
   Movie.findOne({
-    _id: req.paras.id, 
+    _id: req.params.id, 
     author: req.params.id})
       .then(movie => {
         res.render('movies/show', {
@@ -99,7 +99,7 @@ exports.published = (req, res) => {
 exports.edit = (req, res) => {
   req.isAuthenticated();
     Movie.findOne({
-      _id: req.paras.id, 
+      _id: req.params.id, 
       author: req.params.id})
     .then(movie=>{
         res.render('movies/edit', {
