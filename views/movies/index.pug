@@ -10,14 +10,17 @@ block content
           tr
             th Title
             th Status
+            th Author
             th Actions
-        
+            th
+
         tbody
           each movie in movies
             tr
               td
                 a(href=`/movies/${movie.id}`)= movie.title
               td= movie.status
+              td= `${movie.author.firstName} ${movie.author.lastName}`
               td
                 a(href=`/movies/${movie.id}/edit`) edit
                 =' | '
