@@ -58,6 +58,22 @@ app.use('/css', express.static('assets/stylesheets'));
 app.use('/js', express.static('assets/javascripts'));
 app.use('/images', express.static('assets/images'));
 
+// Our Authentication Helper stuff
+const isAuthenticated = (req) => {
+  return req.session && req.session.userId;
+};
+
+app.use((req, res, next) => {
+  req.isAuthenticated = () => {
+    if(!isAuthenticated(req)){
+      req.flash('error', 'You are not permitted to do this action');
+      req.redirect('/');
+    }
+  }
+  res.locals.isAuthenticated = isAuthenticated(req);
+  next();
+});
+
 //Our routes
 const routes = require('./routes.js');
 

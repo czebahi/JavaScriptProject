@@ -9,7 +9,7 @@ exports.new = (req, res) => {
 exports.create = (req, res) => {
     Author.create(req.body.author)
     .then(() => {
-        req.flash('success', 'Your are now registered.');
+        req.flash('success', 'You are now registered.');
         res.redirect('/login');
     })
     .catch(err => {
