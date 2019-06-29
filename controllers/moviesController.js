@@ -53,7 +53,7 @@ exports.show = (req, res) => {
       .then(movie => {
         res.render('movies/show', {
           movie: movie,
-          title: req.body.movie.title
+          title: movie.title
         });
       })
       .catch(err => {
@@ -106,7 +106,7 @@ exports.edit = (req, res) => {
       author: req.session.userId})
     .then(movie=>{
         res.render('movies/edit', {
-            title: `Edit ${req.body.movie.title}`,
+            title: `Edit ${movie.title}`,
             movie: movie
         });
     })
