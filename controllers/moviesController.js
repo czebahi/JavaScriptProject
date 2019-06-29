@@ -7,7 +7,7 @@ exports.new = (req, res) => {
     });
 };
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   req.isAuthenticated();
 
   req.body.movie.author = req.session.userId;
@@ -48,7 +48,7 @@ exports.show = (req, res) => {
   req.isAuthenticated();
   Movie.findOne({
     _id: req.params.id, 
-    author: req.params.id})
+    author: req.session.userId})
       .then(movie => {
         res.render('movies/show', {
           movie: movie,
@@ -82,7 +82,7 @@ exports.drafts = (req, res) => {
 exports.published = (req, res) => {
   req.isAuthenticated();
     Movie.find(({
-      author: req.body.userId
+      author: req.session.userId
     })).published()
       .then(published => {
         res.render('movies/index', {
@@ -100,7 +100,7 @@ exports.edit = (req, res) => {
   req.isAuthenticated();
     Movie.findOne({
       _id: req.params.id, 
-      author: req.params.id})
+      author: req.session.userId})
     .then(movie=>{
         res.render('movies/edit', {
             title: `Edit ${req.body.movie.title}`,
