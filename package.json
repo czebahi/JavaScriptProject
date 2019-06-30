@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/czebahi/JSLab2.git"
+    "url": "git+https://github.com/czebahi/JavaScriptProject.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/czebahi/JSLab2/issues"
+    "url": "https://github.com/czebahi/JavaScriptProject/issues"
   },
-  "homepage": "https://github.com/czebahi/JSLab2#readme",
+  "homepage": "https://github.com/czebahi/JavaScriptProject#readme",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "connect-flash": "^0.1.1",
