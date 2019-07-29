@@ -17,7 +17,7 @@ function Contact(){
                     <CardBody>
                         <CardTitle><strong>Anjali AjithkumarPillai</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
-                        <CardText><email>Anjali.AjithkumarPillai@MyGeorgian.ca</email>
+                        <CardText><small>Anjali.AjithkumarPillai@MyGeorgian.ca</small>
                         </CardText>
                     </CardBody>
                 </Card>
@@ -26,7 +26,7 @@ function Contact(){
                         <CardTitle><strong>Jo Lim</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
                         <CardText>
-                        <email>Jo.Lim@MyGeorgian.ca</email>
+                        <small>Jo.Lim@MyGeorgian.ca</small>
                         </CardText>
                     </CardBody>
                 </Card>
@@ -34,7 +34,7 @@ function Contact(){
                     <CardBody>
                         <CardTitle><strong>Lynette Xie</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
-                        <CardText><email>Lynette.Xie@MyGeorgian.ca</email></CardText>
+                        <CardText><small>Lynette.Xie@MyGeorgian.ca</small></CardText>
                     </CardBody>
                 </Card>
             </CardGroup>
