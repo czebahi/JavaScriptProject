@@ -3,7 +3,7 @@ import React from "react";
 function Home () {
 
     return (
-        <div classname = "container">
+        <div className = "container home-cta">
             <h1>
             Record your fav movies
                <br/>

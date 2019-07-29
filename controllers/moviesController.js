@@ -1,7 +1,8 @@
 const Movie = require('../models/movie');
 
 exports.new = (req, res) => {
-    req.isAuthenticated();
+  if(!req.isAuthenticated()) 
+    return res.status(401).send({error: "Not Authenticated"});
 
     res.render('movies/new', {
       title: `New Movie Post`

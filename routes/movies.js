@@ -5,9 +5,6 @@ const router = require('express').Router();
 const MoviesController = require('../controllers/moviesController');
 
 // Our routes
-router.get(`/new`, MoviesController.new);
-router.get(`/drafts`, MoviesController.drafts);
-router.get(`/published`, MoviesController.published);
 router.get(`/`, MoviesController.index);
 router.get(`/:id`, MoviesController.show);
 router.post(`/`, MoviesController.create);
