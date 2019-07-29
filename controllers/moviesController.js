@@ -9,146 +9,106 @@ exports.new = (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  req.isAuthenticated();
+  if(!req.isAuthenticated()) 
+    return res.status(401).send({error: "Not Authenticated"});
 
+  // Add the current author to the movie
   req.body.movie.author = req.session.userId;
-  Movie.create(req.body.movie)
-    .then(() => {
-      req.flash('success', 'New movie was created successfully');
-      res.redirect('/movies');
-    })
-    .catch(err => {
-      req.flash('error', `ERROR ${err}`);
-      res.render('movies/new', {
-        movie: req.body.movie,
-        title: 'New Movie'
-      });
-    });
-}
 
+  Movie.create(req.body.movie)
+    .then(() => res.status(200).send({success: "Movie created"}))
+    .catch(err => res.status(404).send(err));
+};
 
 exports.index = (req, res) => {
-  req.isAuthenticated();
-    Movie.find({
-      author: req.session.userId
-    })
-    .populate('author')
-      .then(movies => {
-        res.render('movies/index', {
-          movies: movies,
-          title: 'Archive'
-        });
-      })
-      .catch(err => {
-        req.flash('error', `ERROR ${err}`);
-        req.redirect('/');
-      });
+  Movie.find()
+  .populate('author')
+  .then(movies => res.json(movies))
+  .catch(err => res.status(404).json(error));
 }
 
 exports.show = (req, res) => {
-  req.isAuthenticated();
   Movie.findOne({
-    _id: req.params.id, 
-    author: req.session.userId})
-      .then(movie => {
-        res.render('movies/show', {
-          movie: movie,
-          title: movie.title
-        });
-      })
-      .catch(err => {
-        req.flash('error', `ERROR ${err}`);
-        res.redirect('/movies');
-      });
-}
+    _id: req.params.id
+  })
+  .populate("author")
+  .then(movie => res.json(movie))
+  .catch(err => res.status(404).json(err));
+};
 
-exports.drafts = (req, res) => {
-  req.isAuthenticated();
-    Movie.find({
-      author: req.session.userId
-    }).drafts()
-    .populate('author')
-      .then(drafts => {
-        res.render('movies/index', {
-          movies: drafts,
-          title: 'Drafts'
-        });
-      })
-      .catch(err => {
-        req.flash('error', `ERROR ${err}`);
-        res.redirect('/');
-      });
-  }
+// exports.drafts = (req, res) => {
+//   req.isAuthenticated();
+//     Movie.find({
+//       author: req.session.userId
+//     }).drafts()
+//     .populate('author')
+//       .then(drafts => {
+//         res.render('movies/index', {
+//           movies: drafts,
+//           title: 'Drafts'
+//         });
+//       })
+//       .catch(err => {
+//         req.flash('error', `ERROR ${err}`);
+//         res.redirect('/');
+//       });
+//   }
   
   
-exports.published = (req, res) => {
-  req.isAuthenticated();
-    Movie.find(({
-      author: req.session.userId
-    })).published()
-    .populate('author')
-      .then(published => {
-        res.render('movies/index', {
-          movies: published,
-          title: 'Published'
-        });
-      })
-      .catch(err => {
-        req.flash('error', `ERROR ${err}`);
-        res.redirect('/');
-      });
-  }
+// exports.published = (req, res) => {
+//   req.isAuthenticated();
+//     Movie.find(({
+//       author: req.session.userId
+//     })).published()
+//     .populate('author')
+//       .then(published => {
+//         res.render('movies/index', {
+//           movies: published,
+//           title: 'Published'
+//         });
+//       })
+//       .catch(err => {
+//         req.flash('error', `ERROR ${err}`);
+//         res.redirect('/');
+//       });
+//   }
 
 exports.edit = (req, res) => {
-  req.isAuthenticated();
-    Movie.findOne({
-      _id: req.params.id, 
-      author: req.session.userId})
-    .then(movie=>{
-        res.render('movies/edit', {
-            title: `Edit ${movie.title}`,
-            movie: movie
-        });
+  if(!req.isAuthenticated()) 
+    return res.status(401).send({error: "Not Authenticated"});
+
+  Movie.findOne({
+      _id: req.params.id,
+      author: req.session.userId
     })
-    .catch(err => {
-      req.flash('error', `ERROR ${err}`);
-      res.redirect('/movies');
-    });
+    .then(movie => res.send(movie))
+    .catch(err => res.status(404).sned(err));
 };
 
 exports.update = (req, res) => {
   req.isAuthenticated();
+  if(!req.isAuthenticated()) 
+    return res.status(401).send({error: "Not Authenticated"});
+
   Movie.updateOne({
-    _id: req.body.id,
-    author: req.session.userId
-  }, req.body.movie, {
-    runValidators: true
-  })
-  .then(()=>{
-    req.flash('success', 'Your movie was updated successfully');
-    res.redirect('/movies');
-  })
-  .catch(err => {
-    req.flash('error', `ERROR ${err}`);
-    res.render('/edit', {
-      title: `Edit ${req.body.movie.title}`,
-      movie: req.body.movie
-    });
-  });
+      _id: req.body.id,
+      author: req.session.userId
+    }, req.body.movie, {
+      runValidators: true
+    })
+    .then(() => res.status(200).send({success: "Movie updated successfully"}))
+    .catch(err => res.status(404).send(err));
 };
 
 exports.destroy = (req, res) => {
-  req.isAuthenticated();
+  if(!req.isAuthenticated()) 
+    return res.status(401).send({error: "Not Authenticated"});
+
+
   Movie.deleteOne({
-    _id: req.body.id,
-    author: req.session.userId
-  })
-  .then(()=>{
-    req.flash('success', 'Your Movie was deleted successfully');
-    res.redirect("/movies")
-  })
-  .catch(err=>{
-    req.flash('error', `ERROR ${err}`);
-    res.redirect('/movies');
-  })
+      _id: req.body.id,
+      author: req.session.userId
+    })
+    .then(() => res.status(200).send({success: "Movie deleted successfully"}))
+    .catch(err => res.status(404).send(err));
 };

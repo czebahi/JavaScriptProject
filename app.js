@@ -51,16 +51,24 @@ app.use((req, res, next)=>{
   next();
 });
 
-// Our Views
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.use('/css', express.static('assets/stylesheets'));
-app.use('/js', express.static('assets/javascripts'));
-app.use('/images', express.static('assets/images'));
 
-// Our Authentication Helper stuff
-const isAuthenticated = (req) => {
-  return req.session && req.session.userId;
+// Our authentication helper
+const jwt = require('jsonwebtoken');
+const isAuthenticated = req => {
+  const token = 
+  (req.cookies && req.cookies.token) || 
+  (req.body && req.body.token) || 
+  (req.query && req.query.token) ||
+  (req.headers && req.headers["x-access-token"]);
+
+  if(req.session.userId) return true;
+
+  if(!token) return false;
+
+  jwt.verify(token, "bobthebuilder", function (err, decoded){
+    if(err) return false;
+    return true;
+  });
 };
 
 app.use((req, res, next) => {
@@ -78,7 +86,12 @@ app.use((req, res, next) => {
 //Our routes
 const routes = require('./routes.js');
 
-app.use('/', routes);
+app.use('/api', routes);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+})
 
 const port = process.env.PORT || 4000;
 
