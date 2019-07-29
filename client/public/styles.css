@@ -24,6 +24,12 @@ body,
   font-size: 5rem;
 }
 
+.home-cta>h3 {
+  color: rgb(175, 120, 37);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  font-size: 2rem;
+}
+
 .content {
   margin-top: 60px;
 }

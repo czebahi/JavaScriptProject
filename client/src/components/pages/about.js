@@ -40,7 +40,10 @@ function About() {
                 <Card style={{ background: '#bfd6ae' }}>
                     <CardBody>
                         <CardTitle><strong>Lynette Xie</strong></CardTitle>
-                        <CardText></CardText>
+                        <CardText>Hi there, my name is Lynette Xie, currently in my last academic term in Computer Programmer. 
+                            Studying at Georgian is definitely an amazing start of my journey in Canada. 
+                            Programming was something extremely new to my life before but now it has become the stepping stone to my career. 
+                            Lately, I've been studying CISSP for my career and being committed to my workout routine.</CardText>
                     </CardBody>
                 </Card>
             </div>
