@@ -23,7 +23,9 @@ function About() {
                     <div className="w3-card-4">
                         <div className="w3-container">
                         <h3>Jo</h3>
-                        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                        <p>A second year student in Computer Programmer course. 
+                            Very much interested in .NET Framework development and Android OS.
+                            Graduating in December 2019.</p>
                         </div>
                     </div>
                 </div>
