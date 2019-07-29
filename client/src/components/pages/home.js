@@ -5,10 +5,10 @@ function Home () {
     return (
         <div className = "container home-cta">
             <h1>
-            Record your fav movies
+                Record your fav movies
                <br/>
+               <h3>Live to watch movies... #moviesforlife</h3>
             </h1>
-            <h3>Live to watch movies... #moviesforlife</h3> 
         </div>
     );
 }
