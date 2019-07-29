@@ -3,7 +3,9 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, CardGroup } from 'reactstrap';
 
 function Contact(){
+
     return ( 
+
         <div className="container">
             <br/>
             <div className="w3-center w3-padding-64">
@@ -11,7 +13,7 @@ function Contact(){
             </div>
             <hr/>
             <CardGroup>
-                <Card style={{ width: '20rem' }}>    
+                <Card style={{ width: '20rem', background: '#95aacc'}}>    
                     <CardBody>
                         <CardTitle><strong>Anjali AjithkumarPillai</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
@@ -19,7 +21,7 @@ function Contact(){
                         </CardText>
                     </CardBody>
                 </Card>
-                <Card style={{ width: '20rem' }}>
+                <Card style={{ width: '20rem', background: '#bab095' }}>
                     <CardBody>
                         <CardTitle><strong>Jo Lim</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
@@ -28,7 +30,7 @@ function Contact(){
                         </CardText>
                     </CardBody>
                 </Card>
-                <Card style={{ width: '20rem' }}>
+                <Card style={{ width: '20rem', background: '#bfd6ae' }}>
                     <CardBody>
                         <CardTitle><strong>Lynette Xie</strong></CardTitle>
                         <CardSubtitle className="mb-2 text-muted">Georgian College</CardSubtitle>
