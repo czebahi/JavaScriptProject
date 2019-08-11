@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardText, CardBody, CardTitle } from 'reactstrap';
-import TeamImg from '../images/team.PNG';
 
 function About() {
 
@@ -10,9 +9,6 @@ function About() {
             <div className="w3-row-padding" id="contact">
                 <div className="w3-center w3-padding-64">
                     <h1>About Us</h1>
-                </div>
-                <div className = "container">
-                    <image src={TeamImg} alt="Team Member Image" width="500px" height="300px"/>
                 </div>
                 <hr/>
                 <Card style={{background: '#95aacc'}}>    
