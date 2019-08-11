@@ -83,8 +83,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Our routes
-const routes = require('./routes.js');
-app.use('/api', routes);
+const routes = require("./routes.js");
+app.use("/api", routes);
 
 // Handles any requests that don't match the ones above
 const root = path.join(__dirname, '/client/build');
