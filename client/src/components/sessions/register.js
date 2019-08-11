@@ -40,7 +40,7 @@ function Register() {
     return (
         <div className="container">
       <header>
-        <h1>New Author</h1>
+        <h1>New Member</h1>
       </header>
       <div>
         <form action="/api/authors" method="POST" onSubmit={handleSubmit}>
