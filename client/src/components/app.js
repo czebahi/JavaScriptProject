@@ -1,5 +1,5 @@
 import React from "react";
-import Routes from "./routes";
+import Routes from "./routes"
 import MainNav from "./partials/main_nav";
 
 export default function App () {
@@ -10,7 +10,7 @@ export default function App () {
 
     return (
         <div className ="App" style={style}>
-            <Routes />
+            <Routes/>
             <MainNav />
         </div>
     );

@@ -22,11 +22,12 @@ exports.create = async (req, res) => {
 };
 
 exports.index = (req, res) => {
+  
   Movie.find()
-  .populate('author')
-  .then(movies => res.json(movies))
-  .catch(err => res.status(404).json(error));
-}
+    .populate('author')
+    .then(movies => res.json(movies))
+    .catch(err => res.status(404).send(err));
+};
 
 exports.show = (req, res) => {
   Movie.findOne({
@@ -36,43 +37,6 @@ exports.show = (req, res) => {
   .then(movie => res.json(movie))
   .catch(err => res.status(404).json(err));
 };
-
-// exports.drafts = (req, res) => {
-//   req.isAuthenticated();
-//     Movie.find({
-//       author: req.session.userId
-//     }).drafts()
-//     .populate('author')
-//       .then(drafts => {
-//         res.render('movies/index', {
-//           movies: drafts,
-//           title: 'Drafts'
-//         });
-//       })
-//       .catch(err => {
-//         req.flash('error', `ERROR ${err}`);
-//         res.redirect('/');
-//       });
-//   }
-  
-  
-// exports.published = (req, res) => {
-//   req.isAuthenticated();
-//     Movie.find(({
-//       author: req.session.userId
-//     })).published()
-//     .populate('author')
-//       .then(published => {
-//         res.render('movies/index', {
-//           movies: published,
-//           title: 'Published'
-//         });
-//       })
-//       .catch(err => {
-//         req.flash('error', `ERROR ${err}`);
-//         res.redirect('/');
-//       });
-//   }
 
 exports.edit = (req, res) => {
   if(!req.isAuthenticated()) 
@@ -87,7 +51,6 @@ exports.edit = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  req.isAuthenticated();
   if(!req.isAuthenticated()) 
     return res.status(401).send({error: "Not Authenticated"});
 

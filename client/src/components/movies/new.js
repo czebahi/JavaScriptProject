@@ -19,7 +19,7 @@ function New () {
     }
 
     function handleSubmit(event) {
-        event.preventDeault();
+        event.preventDefault();
 
         Axios.post("/api/movies", {
             movie: {
